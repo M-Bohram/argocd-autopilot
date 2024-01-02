@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-resources
+  namespace: argocd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - group: argoproj.io
+      kind: Application
+      jsonPointers:
+        - /status
+  project: default
+  source:
+    path: k8s-resources/tools/argocd/helm/overlays/internal-ch
+    repoURL: https://github.com/M-Bohram/argocd-autopilot.git
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      selfHeal: true
+status: {}
