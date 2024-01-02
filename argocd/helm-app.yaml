@@ -9,6 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   ignoreDifferences:
     - group: argoproj.io
+      kind: Application
       jsonPointers:
         - /status
   project: default
