@@ -1,61 +1,61 @@
-redis-ha:
-  enabled: false
+argo-cd:
+  redis-ha:
+    enabled: false
 
-controller:
-  replicas: 1
+  controller:
+    replicas: 1
 
-repoServer:
-  autoscaling:
+  repoServer:
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+
+  applicationSet:
     enabled: true
-    minReplicas: 1
 
-applicationSet:
-  enabled: true
+  dex:
+    enabled: false
 
-dex:
-  enabled: false
+  server:
+    autoscaling:
+      enabled: true
+      minReplicas: 1
 
-server:
-  autoscaling:
-    enabled: true
-    minReplicas: 1
+  crds:
+    install: true
+    keep: false
 
-crds:
-  install: true
-  keep: false
-
-configs:
-  server.insecure: false
-  cm:
-    create: true
-    exec.enabled: true
-    admin.enabled: false
-    url: "https://localhost:8080/"
-    oidc.config: |
-      name: AzureAD
-      issuer: https://login.microsoftonline.com/887fbd94-2d84-4b96-82d3-b874bdf1edd8/v2.0
-      clientID: 62804745-23d2-4e6b-8ac2-e6f9380a9ad8
-      clientSecret: $oidc.azure.clientSecret
-      requestedIDTokenClaims:
-        groups:
-          essential: true
-      requestedScopes:
-        - openid
-        - profile
-        - email
-    resource.exclusions: |
-      - apiGroups:
-        - "*"
-        kinds:
-        - Backup
-        clusters:
-        - "*"
-  secret:
-    createSecret: false
-  rbac:
-    create: true
-    scopes: "[groups]"
-    policy.default: ""
-    policy.csv: |
-      g, "a978fe5b-72e4-448c-b143-9b52f91c6541", role:admin
-      g, "93318bc8-ce00-4ded-baa7-7d3122a42c10", role:readonly
+  configs:
+    server.insecure: false
+    cm:
+      exec.enabled: true
+      admin.enabled: false
+      url: "https://localhost:8080/"
+      oidc.config: |
+        name: AzureAD
+        issuer: https://login.microsoftonline.com/887fbd94-2d84-4b96-82d3-b874bdf1edd8/v2.0
+        clientID: 62804745-23d2-4e6b-8ac2-e6f9380a9ad8
+        clientSecret: $oidc.azure.clientSecret
+        requestedIDTokenClaims:
+          groups:
+            essential: true
+        requestedScopes:
+          - openid
+          - profile
+          - email
+      resource.exclusions: |
+        - apiGroups:
+          - "*"
+          kinds:
+          - Backup
+          clusters:
+          - "*"
+    secret:
+      createSecret: false
+    rbac:
+      create: true
+      scopes: "[groups]"
+      policy.default: ""
+      policy.csv: |
+        g, "a978fe5b-72e4-448c-b143-9b52f91c6541", role:admin
+        g, "93318bc8-ce00-4ded-baa7-7d3122a42c10", role:readonly
