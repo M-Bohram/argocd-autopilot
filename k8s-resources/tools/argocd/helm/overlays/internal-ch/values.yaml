@@ -29,7 +29,7 @@ argo-cd:
     server.insecure: false
     cm:
       exec.enabled: true
-      admin.enabled: false
+      admin.enabled: true
       url: "https://localhost:8080/"
       oidc.config: |
         name: AzureAD
