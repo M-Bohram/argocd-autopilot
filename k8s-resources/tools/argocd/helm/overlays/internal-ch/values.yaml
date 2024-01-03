@@ -27,6 +27,7 @@ crds:
 configs:
   server.insecure: false
   cm:
+    create: true
     exec.enabled: true
     admin.enabled: false
     url: "https://localhost:8080/"
