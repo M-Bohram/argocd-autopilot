@@ -13,7 +13,7 @@ spec:
         - /status
   project: default
   source:
-    path: k8s-resources/tools/argocd/helm/overlays/internal-ch
+    path: k8s-resources/namespaces
     repoURL: https://github.com/M-Bohram/argocd-autopilot.git
     targetRevision: HEAD
   syncPolicy:
