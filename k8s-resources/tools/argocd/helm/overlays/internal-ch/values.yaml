@@ -22,15 +22,14 @@ server:
 
 crds:
   install: true
-  keep: true
+  keep: false
 
 configs:
-  params:
-    server: insecure
+  server.insecure: false
   cm:
     exec.enabled: true
     admin.enabled: false
-    url: "http://localhost:8080/"
+    url: "https://localhost:8080/"
     oidc.config: |
       name: AzureAD
       issuer: https://login.microsoftonline.com/887fbd94-2d84-4b96-82d3-b874bdf1edd8/v2.0
